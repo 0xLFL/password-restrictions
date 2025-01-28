@@ -15,7 +15,7 @@ export const defaultRestrictionsIds = {
 } as const;
 
 type DefaultRestrictionsIds = typeof defaultRestrictionsIds[keyof typeof defaultRestrictionsIds];
-export type DefaultRestrictions = Record<DefaultRestrictionsIds, boolean | undefined>;
+export type DefaultRestrictions = Partial<Record<DefaultRestrictionsIds, boolean | undefined>>;
 
 export interface PasswordRestrictionsProps {
   label: string,
@@ -57,6 +57,28 @@ const defaultRestrictions: Record<DefaultRestrictionsIds, PasswordRestriction> =
   }
 }
 
+/**
+ * PasswordRestriction creates a element that provides visual feedback to 
+ * users on weather they are currently meeting the reqired password criteria
+ * 
+ * @typedef {object} PasswordRestrictionsProps
+ * @param {string} label - The Label for the reqirements
+ * @param {string} password - The Password the user has entered
+ * @param {string} [confirmPassword] - For confirming both passwords match, the match reqirement will appear if this is defined defined
+ * @param {PasswordRestriction[]} [passwordRestrictions] - For having custom restrictions, when defined none of the default restrictions will be rendered
+ * @param {DefaultRestrictions} [configureDefault] - Allows for the requirement of select default requirements, when defined only reqs that have keys defined as true will be rendered
+ * @param {string} [confirmPasswordCondition] - The label of the passwords must match requirement
+ * @param {React.CSSProperties} [labelStyle] - For appling styles to the label
+ * @param {React.CSSProperties} [containerStyle] - For appling styles to the components container
+ * @param {React.CSSProperties} [restrictionStyle] - For appling styles to the container of each restriction
+ * @param {React.CSSProperties} [iconStyle] - For appling styles to the container of each icon
+ * @param {string} [passColor] - The Color of the Pass icon (only when using the default icon)
+ * @param {React.ReactNode} [passIcon] - The Icon to be displayed if the password passes a restriction  
+ * @param {string} [failColor] - The Color of the Fail icon (only when using the default icon) 
+ * @param {React.ReactNode} [failIcon] - The Icon to be displayed if the password fails a restriction
+ * 
+ * @returns {JSX.Element}
+ */
 const PasswordRestrictions = ({
   label,
   password,
@@ -86,6 +108,8 @@ const PasswordRestrictions = ({
       }
     } else if (passwordRestrictions === undefined) {
       _passwordRestrictions.push(...Object.values(defaultRestrictions));
+    } else {
+      return setPasswordRestrictions(passwordRestrictions)
     }
 
     setPasswordRestrictions(_passwordRestrictions)
