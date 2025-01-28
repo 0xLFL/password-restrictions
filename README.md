@@ -1,4 +1,4 @@
-# ComponentTransitionAnimation
+# PasswordRestriction
 
 ## Getting Started
 PasswordRestriction creates a element that provides visual feedback to users on weather they are currently meeting the reqired password criteria
