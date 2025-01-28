@@ -4,6 +4,9 @@
 PasswordRestriction creates a element that provides visual feedback to users on weather they are currently meeting the reqired password criteria
 
 ### Example
+https://github.com/user-attachments/assets/b3e1a8f0-2353-484f-849c-cd6797f82cff
+
+
 
 
 ### Prerequisites
